@@ -4,14 +4,14 @@ import useSWR from "swr";
 import { Producto } from "../types";
 
 export const Listado = () => {
-  const { data } = useSWR<Producto[], FetchError>("productos");
+  const { data: productos } = useSWR<Producto[], FetchError>("productos");
 
-  console.log(data);
+  console.log({ productos });
 
   return (
-    <main className="prose mx-auto max-sm:px-8">
+    <div className="prose mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
-        {data?.map((item) => (
+        {productos?.map((item) => (
           <Link key={item.id} href={"/listado/" + item.id}>
             <Card>
               <CardBody className="prose">
@@ -23,6 +23,6 @@ export const Listado = () => {
           </Link>
         ))}
       </div>
-    </main>
+    </div>
   );
 };

@@ -19,7 +19,6 @@ import useSWRMutation from "swr/mutation";
 import { fetcher } from "./config";
 import { Articulo } from "./pages/articulo";
 import { Home } from "./pages/home";
-import { Listado } from "./pages/listado";
 import { Login } from "./pages/login";
 import { Perfil } from "./pages/perfil";
 import { Publicar } from "./pages/publicar";
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-  },
-  {
-    path: "/listado",
-    element: <Listado />,
   },
   {
     path: "/listado/:id",
@@ -133,7 +128,7 @@ function App() {
         </NavbarBrand>
         <NavbarContent justify="center">
           <NavbarItem>
-            <Link href="/listado">Listado</Link>
+            <Link href="/">Listado</Link>
           </NavbarItem>
           <NavbarItem>
             <Link href="/publicar">Publicar</Link>

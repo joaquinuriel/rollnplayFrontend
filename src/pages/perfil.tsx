@@ -5,6 +5,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { fetcher } from "../config";
 import { Usuario } from "../types";
+import { Admin } from "./admin";
 
 export const Perfil = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const Perfil = () => {
     },
     {
       onSuccess(data) {
+        console.log({ data });
         if (!data) navigate("/login");
         setNombre(data.nombre);
         setApellido(data.apellido);
@@ -94,6 +96,8 @@ export const Perfil = () => {
           Cerrar sesión
         </Button>
       </div>
+
+      <Admin />
     </main>
   );
 };

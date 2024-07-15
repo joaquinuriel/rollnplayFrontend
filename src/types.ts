@@ -4,6 +4,7 @@ export interface Usuario {
   apellido: string;
   correo: string;
   contraseña: string;
+  rol: string;
   carrito: Carrito;
   productos: Producto[];
   compras: Item[];

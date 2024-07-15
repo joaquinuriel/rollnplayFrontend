@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { fetcher } from "../config";
-import { Categoria } from "../types";
+import { Categoria, Usuario } from "../types";
 
 export const Publicar = () => {
   const [cookie] = document.cookie.split(";");
@@ -24,13 +24,24 @@ export const Publicar = () => {
     "productos/categorias"
   );
 
-  const { data: user, isLoading } = useSWR("auth", (key) => {
-    return fetcher(key, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  const { data: user, isLoading } = useSWR(
+    `auth:${token}`,
+    () => {
+      return fetcher<Usuario>("auth", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    },
+    {
+      onSuccess(data) {
+        if (data.rol === "USER") {
+          alert(
+            "No tienes permisos para publicar, comunícate con nuestro equipo para darte de alta como vendedor"
+          );
+          navigate("/perfil");
+        }
       },
-    });
-  });
+    }
+  );
 
   console.log({ user, cats });
 
